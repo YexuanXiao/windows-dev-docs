@@ -1,7 +1,7 @@
 ---
 description: If you want your app to support different display languages, and you have string literals in your code or XAML markup or app package manifest, then move those strings into a Resources File (.resw). You can then make a translated copy of that Resources File for each language that your app supports.
 title: Localize strings in your UI and app package manifest
-ms.date: 03/08/2023
+ms.date: 04/11/2024
 ms.topic: article
 keywords: windows 10, windows 11, winui, windows app sdk, resource, image, asset, MRT, qualifier
 ms.author: aashcraft
@@ -146,7 +146,7 @@ You only need to add `/<resources-file-name>/` before the string resource identi
 The code example below assumes that `ErrorMessages.resw` contains a resource whose name is "MismatchedPasswords" and whose value describes the error.
 
 ```csharp
-var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader("ErrorMessages");
+var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader(Microsoft.Windows.ApplicationModel.Resources.ResourceLoader.GetDefaultResourceFilePath(), "ErrorMessages");
 this.myXAMLTextBlockElement.Text = resourceLoader.GetString("MismatchedPasswords");
 ```
 
@@ -155,7 +155,7 @@ If you were to move your "AppDisplayName" resource out of `Resources.resw` and i
 If a resource file name is segmented (it contains "." characters), then leave the dots in the name when you reference it. **Don't** replace dots with forward slash ("/") characters, like you would for a resource name.
 
 ```csharp
-var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader("Err.Msgs");
+var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader(Microsoft.Windows.ApplicationModel.Resources.ResourceLoader.GetDefaultResourceFilePath(), "Err.Msgs");
 ```
 
 If in doubt, you can use [MakePri.exe](/windows/uwp/app-resources/makepri-exe-command-options) to dump your app's PRI file. Each resource's `uri` is shown in the dumped file.
